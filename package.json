@@ -1,0 +1,25 @@
+{
+    "name": "ecoule-data-handler-key-value-copy",
+    "version": "0.0.1",
+    "description": "An écoule data handler that copy data internaly within an entry",
+    "author": "Martin Gausby <martin@gausby.dk>",
+    "repository": "git@github.com:gausby/ecoule-data-handler-key-value-copy.git",
+    "main": "lib/ecoule-data-handler-key-value-copy.js",
+    "dependencies": {
+    },
+    "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-buster": "0.2.1",
+        "grunt-connect": ">= 0.2.0",
+        "grunt-contrib-jshint": "0.6.4",
+        "grunt-contrib-watch": "0.5.3",
+        "grunt-contrib-yuidoc": ">= 0.5.0",
+        "grunt-clear": "0.2.1",
+
+        "buster": "0.7.6"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "engine": "*"
+}
