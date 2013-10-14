@@ -39,7 +39,7 @@ One or more directives can be given. A directive need at least a `from` and `to`
 If you need more than one directive pass them in as an array.
 
 
-##### `from` and `to`
+##### `from`, `write`, and `to`
 
 A directive is a normal object literal with the following structure:
 
@@ -55,6 +55,19 @@ This will copy the data from `input-key` to `output-key` in the passed in entry 
     var entry = { 'input-key': 'foo' };
 
     example(entry); // entry is now { 'input-key': 'foo', 'output-key': 'foo' }
+
+Alternatively a directive can *write* data to an output key.
+
+    var example = copy({
+        write: 'something',
+        to: 'output-key'
+    });
+
+    var entry = { };
+
+    example(entry); // entry is now { 'output-key': 'something' }
+
+If neither a `write` or `from` command is present in a directive the data handler will throw an exception. If both are present in the same directive it will also throw an exception. A directive needs at least one.
 
 
 ##### `fn`

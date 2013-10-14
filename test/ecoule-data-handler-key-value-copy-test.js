@@ -67,14 +67,33 @@ buster.testCase('During initialization', {
             });
         },
 
-        'from: is not a string': function() {
+        'two actions is set in one directive': function() {
+            assert.exception(function() {
+                var config = {
+                    directives: [{ from: 'foo', write: 'bar', to: 'baz' }]
+                };
+                handler(config).initialize(throwError);
+            });
+        },
+
+        'from: is not a string or write: is not set': function() {
             assert.exception(function() {
                 var config = { directives: { from: {}, to: 'foo' } };
                 handler(config).initialize(throwError);
             });
 
+            assert.exception(function() {
+                var config = { directives: { to: 'foo' } };
+                handler(config).initialize(throwError);
+            });
+
             refute.exception(function() {
                 var config = { directives: { from: 'bar', to: 'foo' } };
+                handler(config).initialize(throwError);
+            });
+
+            refute.exception(function() {
+                var config = { directives: { write: 'bar', to: 'foo' } };
                 handler(config).initialize(throwError);
             });
         },
@@ -167,6 +186,17 @@ buster.testCase('During execution', {
 
         test.execute(obj, function () {
             assert.equals(obj.bar, 'BAZ');
+        });
+    },
+
+    'should write content of \'write:\' to from if write is set': function() {
+        var test = handler({
+            directives: { write: 'foobar', to: 'bar' }
+        });
+        var obj = {};
+
+        test.execute(obj, function () {
+            assert.equals(obj.bar, 'foobar');
         });
     }
 });
